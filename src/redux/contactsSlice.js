@@ -55,7 +55,11 @@ const contactsSlice = createSlice({
         state.error = null;
         state.items = action.payload;
       })
-      .addCase(searchContact.rejected, handleRejected);
+      .addCase(searchContact.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+        state.items = [];
+      });
   },
 });
 
